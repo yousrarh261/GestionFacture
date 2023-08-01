@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\UtilisateursRepository;
 use App\Entity\Messages;
 use App\Entity\Equipe;
-use App\Entity\DomainTicket;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -115,13 +114,10 @@ private $equipe;
         $this->tickets = new ArrayCollection();
         $this->ticketsClient = new ArrayCollection();
         $this->uploadedFiles = new ArrayCollection();
-        $this->domainTickets = new ArrayCollection();
         $this->isVerified = false;
         $this->isValidByAdmin =false; 
         $this->responsables = new ArrayCollection();
 
-        $this->sent = new ArrayCollection();
-        $this->received = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,36 +193,9 @@ private $equipe;
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection|Ticket[]
-     */
-    public function getTickets(): Collection
-    {
-        return $this->tickets;
-    }
+  
 
-    public function addTicket(Ticket $ticket): self
-    {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets[] = $ticket;
-            $ticket->setUtilisateurs($this);
-        }
 
-        return $this;
-    }
-
-    public function removeTicket(Ticket $ticket): self
-    {
-        if ($this->tickets->contains($ticket)) {
-            $this->tickets->removeElement($ticket);
-            // set the owning side to null (unless already changed)
-            if ($ticket->getUtilisateurs() === $this) {
-                $ticket->setUtilisateurs(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getName(): ?string
     {
@@ -296,28 +265,9 @@ private $equipe;
         return $this->ticketsClient;
     }
 
-    public function addTicketsClient(Ticket $ticketsClient): self
-    {
-        if (!$this->ticketsClient->contains($ticketsClient)) {
-            $this->ticketsClient[] = $ticketsClient;
-            $ticketsClient->setClient($this);
-        }
+ 
 
-        return $this;
-    }
 
-    public function removeTicketsClient(Ticket $ticketsClient): self
-    {
-        if ($this->ticketsClient->contains($ticketsClient)) {
-            $this->ticketsClient->removeElement($ticketsClient);
-            // set the owning side to null (unless already changed)
-            if ($ticketsClient->getClient() === $this) {
-                $ticketsClient->setClient(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getIsValidByAdmin(): ?bool
     {
@@ -363,113 +313,11 @@ private $equipe;
         return $this->uploadedFiles;
     }
 
-    public function addUploadedFile(UploadFile $uploadedFile): self
-    {
-        if (!$this->uploadedFiles->contains($uploadedFile)) {
-            $this->uploadedFiles[] = $uploadedFile;
-            $uploadedFile->setUser($this);
-        }
 
-        return $this;
-    }
 
-    public function removeUploadedFile(UploadFile $uploadedFile): self
-    {
-        if ($this->uploadedFiles->contains($uploadedFile)) {
-            $this->uploadedFiles->removeElement($uploadedFile);
-            // set the owning side to null (unless already changed)
-            if ($uploadedFile->getUser() === $this) {
-                $uploadedFile->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
- 
-    /**
-     * @return Collection|Messages[]
-     */
-    public function getSent(): Collection
-    {
-        return $this->sent;
-    }
-
-    public function addSent(Messages $sent): self
-    {
-        if (!$this->sent->contains($sent)) {
-            $this->sent[] = $sent;
-            $sent->setSender($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSent(Messages $sent): self
-    {
-        if ($this->sent->contains($sent)) {
-            $this->sent->removeElement($sent);
-            // set the owning side to null (unless already changed)
-            if ($sent->getSender() === $this) {
-                $sent->setSender(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Messages[]
-     */
-    public function getReceived(): Collection
-    {
-        return $this->received;
-    }
-
-    public function addReceived(Messages $received): self
-    {
-        if (!$this->received->contains($received)) {
-            $this->received[] = $received;
-            $received->setRecipient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReceived(Messages $received): self
-    {
-        if ($this->received->contains($received)) {
-            $this->received->removeElement($received);
-            // set the owning side to null (unless already changed)
-            if ($received->getRecipient() === $this) {
-                $received->setRecipient(null);
-            }
-        }
-
-        return $this;
-    }
 
    
-    public function getDomainTickets(): Collection
-    {
-        return $this->domainTickets;
-    }
 
-    public function addDomainTicket(DomainTicket $domainTicket): self
-    {
-        if (!$this->domainTickets->contains($domainTicket)) {
-            $this->domainTickets[] = $domainTicket;
-        }
-
-        return $this;
-    }
-
-    public function removeDomainTicket(DomainTicket $domainTicket): self
-    {
-        $this->domainTickets->removeElement($domainTicket);
-
-        return $this;
-    }
    
 
 
