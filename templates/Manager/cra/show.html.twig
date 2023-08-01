@@ -1,0 +1,139 @@
+{% extends 'baseManager.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+
+        <h1 class="mb-4">Saisir le compte rendu d'activité pour le mois de {{ month }}</h1>
+
+        <form method="post">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Date</th>
+                                <h1>Ajouter un CRA</h1>
+                              {% for day in days %}
+                                <th>{{ day.format('d') }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Valeur</td>
+                            {% for day in days %}
+                                <td>
+                                    <div class="form-group">
+                                        {% if day|date('w') in [0, 6] %}
+                                            <input type="hidden" name="values[{{ day.format('Y-m-d') }}]" value="0">
+                                            <p class="text-muted">0</p>
+                                        {% else %}
+                                            <select name="values[{{ day.format('Y-m-d') }}]" class="form-control">
+                                                <option value="0">0</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre de jours entrés : </label>
+                <input id="days-input" type="text" readonly class="form-control-plaintext" value="0">
+            </div>
+
+            <button id="all-ones-button" type="button" class="btn btn-primary">Remplir Cra</button>
+            <button id="clear-button" type="button" class="btn btn-danger">Effacer tout</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+    </div>
+
+<script>
+  const selects = document.querySelectorAll('select');
+  const daysInput = document.getElementById('days-input');
+  const allOnesButton = document.getElementById('all-ones-button');
+  const clearButton = document.getElementById('clear-button');
+  let totalDays = 0;
+
+  selects.forEach(select => {
+    select.addEventListener('change', () => {
+      const currentValue = parseFloat(select.value);
+      const previousValue = parseFloat(select.getAttribute('data-previous-value'));
+      // Si la valeur sélectionnée change de 1 à 0, soustraire 1 du nombre total de jours
+      if (previousValue === 1 && currentValue == 0 && currentValue == 0.5) {
+        totalDays -= 1;
+      }
+      // Si la valeur sélectionnée change de 0 à 0.5 ou à une autre valeur, mettre à jour le nombre total de jours en ajoutant ou en soustrayant la différence
+      else if (previousValue === 0 && currentValue !== 0) {
+        totalDays += currentValue;
+      }
+      else if (previousValue !== currentValue) {
+        totalDays += (currentValue - previousValue);
+      }
+      daysInput.value = totalDays;
+      select.setAttribute('data-previous-value', currentValue);
+    });
+    // Initialiser la valeur précédente de chaque select à 1
+    select.setAttribute('data-previous-value', '1');
+  });
+
+  allOnesButton.addEventListener('click', () => {
+    selects.forEach(select => {
+      if (select.getAttribute('disabled') !== 'true') {
+        select.value = "1";
+        totalDays += 1;
+        daysInput.value = totalDays;
+        select.setAttribute('data-previous-value', '1');
+      }
+    });
+    allOnesButton.setAttribute('disabled', 'true'); // désactiver le bouton "Remplir Cra"
+  });
+
+  clearButton.addEventListener('click', () => {
+    selects.forEach(select => {
+      select.value = "0";
+      select.setAttribute('data-previous-value', '0');
+    });
+    totalDays = 0;
+    daysInput.value = totalDays;
+    allOnesButton.removeAttribute('disabled'); // activer à nouveau le bouton "Remplir Cra"
+  });
+</script>
+
+    <style>
+        .form-control {
+          display: block;
+          width: 60px;
+          height: calc(1.5em + .75rem + 2px);
+          padding: .375rem .75rem;
+          font-size: 1rem;
+          font-weight: 400;
+          line-height: 1.5;
+          color: #495057;
+          background-color: #fff
+          background-clip: padding-box;
+          border: 1px solid #ced4da;
+          border-radius: .25rem;
+          transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+        #sidebar {
+          min-width: 200px;
+          background: #f9c52d5e;
+          color: #0d0c0c;
+          border-radius: .25rem;
+          transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        #sidebar {
+          min-width: 200px;
+          background: #f9c52d5e;
+          color: #0d0c0c;
+        transition: all 0.3s;
+         width: 50px;
+}
+    </style>
+{% endblock %}

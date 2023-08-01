@@ -1,0 +1,90 @@
+{% extends 'baseManager.html.twig' %}
+
+{% block title %}
+    utilisateursss !
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+{% endblock %}
+
+{% block body %}
+<div id="content" style="text-align:center; ">
+    <div class="card mt-5" style="WIDTH: 850PX; FLOAT: RIGHT; margin-right: 200px;">
+        <div class="card-body">
+            <div class="row" style="width: 567px; margin-top:15px; margin-left:15px;">
+                <div class="col-md-6" style="margin-top:10px;">
+                    <h1 class="h1" style="font-style:italic">
+                    </h1>
+                    <hr>
+                    <div>
+                        <h2 class="h3">Mes informations personnelles</h2>
+                        <form method="POST" action="{{ path('manager_name_edit') }}">
+                            <div class="form-group">
+                                <label for="name">Nom d'utilisateur :</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ app.user.name }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse mail :</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ app.user.email }}" disabled>
+                            </div>
+                           
+                            {% for message in app.flashes('message') %}
+                                <div class="alert alert-success" role="alert">{{ message }}</div>
+                            {% endfor %}
+                            <button type="submit" class="btn btn-light" style=" background-color: #fcc753;
+color: #1e1b1b;
+border: none;
+width: 150px;
+font-size: unset;
+margin-top: 15px;"
+>
+                                Modifier le profil
+                            </button>
+                        </form>
+                        <a href="{{ path('manager_passe_edit') }}" class="btn btn-light" style=" background-color: #fcc653;
+color: #1e1b1b;
+border: none;
+width: 250px;
+font-size: unset;
+margin-top: 15px;"
+>
+
+                            Modifier le mot de passe
+                        </a>
+                        <h2><br></h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://media.istockphoto.com/id/1334913107/fr/vectoriel/concept-de-termes-et-conditions-les-personnes-signant-des-documents-prot%C3%A9geant-des.jpg?s=612x612&w=0&k=20&c=ncL8b53pcI2SV0rXfDZ-RIa3feJQaUSSvhd1On65Ex0=" alt="Mon image" style="  vertical-align: revert-layer;
+  border-style: none;
+  width: 450px;
+">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    input[disabled] {
+        background-color: #e9ecef;
+    }
+
+ #btn btn-light{
+  background-color: #d6a64d;
+  color: #1e1b1b;
+  border: none;
+  border-radius: 10px;
+  width: 150px;
+  font-size: unset;
+  margin-top: 15px;
+}
+
+#row{
+    width: 800px;
+}
+
+</style>
+{% endblock %}

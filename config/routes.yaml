@@ -1,0 +1,14 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+ckeditor:
+    path: /ckeditor.php
+    methods: [GET,OPTIONS]
+reset_password:
+    path: /utilisateur/{id}/reset-password
+    controller: App\Controller\Admin\AdminUserController::resetPassword
+    methods: [POST]
+# routes.yaml
+edit_user:
+    path: '/user/{id}/edit'
+    controller: App\Controller\AdminUserController::edit

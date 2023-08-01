@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
+
+</head>
+		<style>
+    body {
+      background-color: #eaeded ;
+    }
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+		</style>
+<div class="main-block" style="text-align:center" ></head>
+
+		{% for flashError in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		{% endfor %}
+		{% for message in app.flashes('notice') %}
+			<div class="alert alert-success" role="alert">
+
+				{{ message }}
+			</div>
+		{% endfor %}
+    	{% for erreur in app.flashes('error') %}
+			<div class="alert alert-danger" role="alert">
+
+				{{ erreur }}
+			</div>
+		{% endfor %}
+		
+		<body>
+
+
+
+
+
+
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form method="post">
+        {{ form_start(registrationForm) }}
+          <div class="d-flex flex-row align-items-center 
+          justify-content-center justify-content-lg-start">
+            <p class="lead fw-normal mb-2 me-9">
+            <img src="{{ absolute_url(asset('assets/Images/solway2.png'))}}" width="120%"/></p>
+            
+          </div>
+
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0"></p>
+          </div>
+
+          <!-- Email input -->
+
+           <div class="form-outline mb-4">
+                     {{form_errors(registrationForm.name)}}
+
+            					{{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Nom'}}) }}
+                    
+
+	
+          </div>
+    
+
+          <div class="form-outline mb-4">
+          {{form_errors(registrationForm.email)}}
+            					{{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Email'}})}}
+
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+                    {{form_errors(registrationForm.plainPassword.first)}}
+
+           		{{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': 'Mot de passe'}}) }}
+          </div>
+
+
+           <!-- Password input -->
+          <div class="form-outline mb-3">
+           {{form_errors(registrationForm.plainPassword.second)}}
+
+           		{{ form_widget (registrationForm.plainPassword.second, { 'attr': { 'placeholder': 'Confirmer votre motde passe'} }) }}
+          </div>
+
+         
+						 <div class="d-flex justify-content-between align-items-center">
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms">
+                <label class="form-check-label" for="agreeTerms">
+                  J'accepte les <a href="#" class="text-body" id="conditionsLink">conditions d'utilisation</a>
+                </label>
+              </div>
+            <div class="form-check mb-0">
+            
+              
+            </div>
+           {# <a href="#!" class="text-body">Mot de passe oublié?</a>#}
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Créer mon compte</button>
+              	{{ form_end(registrationForm) }}
+            <p class="small fw-bold mt-2 pt-1 mb-0">Déja un compte?
+             <a href="{{ path('app_login') }}"
+                class="link-danger">Me connecter</a></p>
+      <div class="modal fade" id="conditionsModal" tabindex="-1" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="conditionsModalLabel">Condition d'utilisation</h5>
+                </div>
+                <div class="modal-body">
+                
+                  <p>Merci de lire attentivement les conditions d'utilisation suivantes avant d'utiliser notre site de gestion de tickets. En utilisant ce site, vous acceptez pleinement et sans réserve ces conditions. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser le site.
+
+<br>
+<br>
+<h3>Utilisation autorisée</h3>
+
+Notre site de gestion de tickets est destiné à être utilisé par les employés de notre entreprise pour soumettre, suivre et résoudre les tickets liés aux problèmes techniques ou aux demandes de support. Toute utilisation non autorisée ou contraire à cet objectif est strictement interdite.
+
+<h3>Création de compte </h3>
+
+<p>La création d'un compte utilisateur est nécessaire pour accéder à certaines fonctionnalités du site. En créant un compte, vous garantissez que toutes les informations fournies sont exactes et à jour. Vous vous engagez à ne pas créer plusieurs comptes ni à partager votre compte avec d'autres personnes.
+</p>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark" style="color:red">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      SOWLAY Consulting & Services ©2022
+    </div>
+    <!-- Right -->
+    <div>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-facebook-f" style="font-size:20px"></i>
+      </a>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-instagram" style="font-size:20px"></i>
+      </a>
+      <a href="#!" class="text-white">
+        <i class="fab fa-linkedin-in" style="font-size:20px;color:blue"></i>
+      </a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+  <script>
+    document.getElementById('conditionsLink').addEventListener('click', function(event) {
+      event.preventDefault();
+      var modal = new mdb.Modal(document.getElementById('conditionsModal'));
+      modal.show();
+    });
+  </script>
+
+  <style>
+    .invalid-feedback, .invalid-tooltip {
+      font-size: 15px;
+      margin-top: -22px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+
+  
+</body>
+</html>
+
+<style>
+
+
+.invalid-feedback, .invalid-tooltip {
+  font-size: 15px;
+  margin-top: -22px;
+}
+
+</style>
+		</body>
+</html>
+
+
+
+
+
+
+
+
+
+

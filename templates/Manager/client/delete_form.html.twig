@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('ticket_delete', {'id': ticket.id}) }}" onsubmit="etes vous sur de vouloir supprimer ce ticket?');">
+
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ticket.id) }}">
+	<button class="btn">Delete</button>
+</form>

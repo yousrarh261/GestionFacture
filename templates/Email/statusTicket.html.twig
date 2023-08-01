@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %}
+		</title> 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		{% endblock %}
+	</head>
+    {% block body %}
+	<body>
+  
+		Bonjour 
+		<br>
+
+		Le status de votre ticket sur le site SOLWAY consulting 
+        & Services a été modifié,veuillez accéder à votre compte pour suivre son état d'avancement
+       {# <a href ="{{ path ('ticket_show') }}"> ici </a> #}
+     
+
+		<br>
+		<br>
+
+
+		Cordialement<br>
+
+		SOLWAY Consulting & Services<br>
+
+		<img src="{{ absolute_url(asset('assets/Images/Logo_slogan.jpg'))}}" width="30%"/> 
+       
+		</body>
+        {% endblock %}
+	</html>

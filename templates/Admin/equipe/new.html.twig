@@ -1,0 +1,15 @@
+{% extends 'BaseAdmin.html.twig' %}
+
+{% block title %}Administration
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+
+		<h1 class="mt-5">Ajouter une nouvelle équipe</h1>
+
+{{ include('admin/equipe/_form.html.twig') }}
+
+	{% endblock %}
+
+

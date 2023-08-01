@@ -1,0 +1,14 @@
+{% extends 'baseClient.html.twig' %}
+
+{% block body %}
+    <h1>Ajouter un CRA</h1>
+
+
+
+    {{ form_start(form) }}
+    {{ form_row(form.month) }}
+    {{ form_row(form.year) }}
+    {{ form_row(form.save) }}
+    {{ form_end(form) }}
+    
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'BaseAdmin.html.twig' %}
+
+
+{% block title %}Administration
+{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href ="{{ asset('css/ticket.css') }}">
+
+<style>
+.table-title {
+    padding-bottom: 15px;
+    background: #287892;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+}
+
+</style>
+
+
+{% endblock %}
+{% block body %}
+
+<div class="container mt-5">
+
+<a href="{{ path('admin_app_equipe_new') }}" class="btn btn-light mt-5">
+
+		<i class="fa fa-plus" aria-hidden="true"></i>Ajouter une équipe
+	</a>
+<h1 class="mt-5"></h1>
+
+
+	<table class="table table-hover">
+
+		<thead class="thead">
+			<tr>
+				<th>Id</th>
+				<th>Nom équipe </th>
+                <th>Crée le </th>
+				<th>Action</th>
+			</tr>
+		</thead>
+
+		<tbody class="tbody">
+
+			{% for equipe in equipes %}
+				<tr>
+					<th>{{ equipe.id }}</th>
+					<th>{{ equipe.NomEquipe}}</th>
+                   <th> {{equipe.DateEquipe|date("d/m/Y") }}</th>
+
+				   <th> <a href="{{ path('admin_app_equipe_show', {id: equipe.id}) }}" class="btn btn-primary">
+				<i class=" fa fa-eye" aria-hidden=" true"></i>
+
+</th>
+					
+					<th>
+
+						<div class="div_btn">
+							<a href="{{ path('admin_app_equipe_edit', {id: equipe.id}) }}" class="btn btn-primary">
+								<i class="fa fa-pencil-square-o" style='font-size:25px' aria-hidden="true"></i>
+							</a>
+
+							<form method="post" action="{{ path('admin_app_equipe_delete', {id: equipe.id}) }}" style="display: inline-block" onsubmit="return confirm('Etes vous vraiment sur ?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ equipe.id) }}">
+								<button class="btn btn-danger">
+									<i class="fa fa-trash" style='font-size:25px' aria-hidden="true"></i>
+								</button>
+
+							</form>
+						</div>
+					</th>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Il n'y a pas de priorité</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

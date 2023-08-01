@@ -1,0 +1,10 @@
+<h1>Bonjour </h1>
+
+<p></p>
+<p>Nous avons le plaisir de vous communiquer un lien sécurisé qui vous permettra d'accéder à votre Espace Client SOLWAY University</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>Nous attirons votre attention sur le fait que ce lien est valable {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+<p>!</p>

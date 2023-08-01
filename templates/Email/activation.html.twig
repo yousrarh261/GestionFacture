@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		{% endblock %}
+	</head>
+	<body>
+		Bonjour ,
+		<br>
+
+	  Un nouveau utilisateur vient de créer un compte sur SOLWAY Consulting & Services avant de pouvoir accéder à son compte, <br>
+
+vous devez confirmer son compte en cliquant sur ce lien:<a href="{{ url('confirm_account', {"token": token}) }}">
+		Valider le compte</a><br>
+
+		Cordialement,<br>
+
+		SOLWAY Consulting & Services<br>
+
+		<img src="{{ absolute_url(asset('assets/Images/Logo_slogan.jpg'))}}" width="30%"/> {% block body %}{% endblock %}{% block javascripts %}{% endblock %}
+		</body>
+	</html>

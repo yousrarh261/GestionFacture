@@ -1,0 +1,49 @@
+{% extends 'BaseAdmin.html.twig'%}
+
+{% block title %}
+	utilisateursss !
+{% endblock %}
+{% block stylesheets %}
+          <link rel="stylesheet" href ="{{ asset('css/styles.css') }}">
+
+{% endblock %}
+
+
+{% block body %}
+<div id="content" style="text-align:center;FLOAT: RIGHT;WIDTH: 800PX;MARGIN-RIGHT: 255PX;">
+	<div class="mt-5">
+		<h1 class="h1" style="font-style:italic">
+			Profile de l'administrateur
+			{{ app.user.name }}</h1>
+		<hr>
+		<div>
+			<h2 class="h3">Mes informations personelles</h2>
+			<div id = "coin" >
+
+				<p style="color:black;font-size:20px">
+				<b>Nom d'utilisateur:</b>
+					{{ app.user.name }}
+					<br>
+					<b>Adresse mail</b> :
+					{{ app.user.email }}
+				</p>
+			</div>
+		</div>
+		{% for message in app.flashes('message') %}
+			<div class="alert alert-success" role="alert">{{ message }}</div>
+		{% endfor %}
+
+<a href="{{ path('admin_name_edit') }}" class="btn btn-light"  
+style=" background-color: #FEC74C;color:white; margin-top:-41px;margin-left:33px;">Modifier le profile</a>
+
+<a href="{{ path('admin_passe_edit') }}" class="btn btn-light" 
+			 style=" background-color: #FEC74C;color:white; margin-top:58px;margin-left:-197px;">Modifier le mot de passe</a>
+		<h2>
+		<br>
+			
+	</div>
+	</div>
+    </div>
+
+	 
+{% endblock %}

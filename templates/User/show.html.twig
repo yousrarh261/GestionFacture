@@ -1,0 +1,599 @@
+
+{% extends 'baseClient.html.twig' %}
+{% block title %}Détail du ticket
+{% endblock %}
+{% block stylesheets %}
+          <link rel="stylesheet" href ="{{ asset('css/styles.css') }}">
+<style>
+
+.table-responsive {
+    margin: 20px 20px;
+    
+}
+
+.table-wrapper {
+    min-width: 1000px;
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {
+    padding-bottom: 15px;
+    background: #287892;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+}
+.table-title h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+}
+.table-title .btn {
+    color: #566787;
+    float: right;
+    font-size: 13px;
+    background: #fff;
+    border: none;
+    min-width: 50px;
+    border-radius: 2px;
+    border: none;
+    outline: none !important;
+    margin-left: 10px;
+}
+.table-title .btn:hover, .table-title .btn:focus {
+    color: #566787;
+    background: #f2f2f2;
+}
+.table-title .btn i {
+    float: left;
+    font-size: 21px;
+    margin-right: 5px;
+}
+.table-title .btn span {
+    float: left;
+    margin-top: 2px;
+}
+table.table tr th, table.table tr td {
+    border-color: #e9e9e9;
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+table.table tr th:first-child {
+    width: 60px;
+}
+table.table tr th:last-child {
+    width: 120px;
+}
+table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+}
+table.table-striped.table-hover tbody tr:hover {
+    background: #f5f5f5;
+}
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}	
+table.table td:last-child i {
+    opacity: 0.9;
+    font-size: 22px;
+    margin: 0 5px;
+}
+table.table td a {
+    font-weight: bold;
+    color: #566787;
+    display: inline-block;
+    text-decoration: none;
+}
+table.table td a:hover {
+    color: #2196F3;
+}
+table.table td a.settings {
+    color: #2196F3;
+}
+table.table td a.delete {
+    color: #F44336;
+}
+table.table td i {
+    font-size: 19px;
+}
+table.table .avatar {
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.status {
+    font-size: 30px;
+    margin: 2px 2px 0 0;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 10px;
+}
+.text-success {
+    color: #10c469;
+}
+.text-info {
+    color: #62c9e8;
+}
+.text-warning {
+    color: #FFC107;
+}
+.text-danger {
+    color: #ff5b5b;
+}
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+.pagination li a {
+    border: none;
+    font-size: 13px;
+    min-width: 30px;
+    min-height: 30px;
+    color: #999;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 2px !important;
+    text-align: center;
+    padding: 0 6px;
+}
+.pagination li a:hover {
+    color: #666;
+}	
+.pagination li.active a, .pagination li.active a.page-link {
+    background: #03A9F4;
+}
+.pagination li.active a:hover {        
+    background: #0397d6;
+}
+.pagination li.disabled i {
+    color: #ccc;
+}
+.pagination li i {
+    font-size: 16px;
+    padding-top: 6px
+}
+.hint-text {
+    float: left;
+    margin-top: 10px;
+    font-size: 13px;
+}
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: none;
+}
+body {
+	font-family: sans-serif;
+	text-align: center;
+}
+#progression {
+	margin: 0 auto;
+	padding-bottom: 23px; 
+    margin-left:200px;/* taille de la margin top et de lataille de police de la description */
+}
+#progression > * {
+	background: #DEDEDE;
+	display: inline-block;
+	vertical-align: middle;
+}
+#progression .fait + *, #progression .fait {
+	background: orange;
+}
+#progression .etape {
+	color: white;
+    text-align:center;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 24px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	position: relative;
+}
+#progression .etape .desc {
+	color: #DEDEDE;
+	position: absolute;
+	top: 100%;
+	margin-top: 10px;
+	left: 50%;
+	font-size: 18px;
+	margin-left: -75px;
+	width: 150px;
+	line-height: 1;
+}
+#progression .fait .desc, #progression .fait + .etape .desc {
+	color: orange;
+}
+#progression .ligne {
+	width: 100px;
+	height: 8px;
+	margin: 0 1px;
+
+}
+</style>
+
+
+
+
+
+
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+	<div class="container mt-5">
+   
+
+
+
+	<div id="progression">
+
+    {% if ticket.getStatutTicket().getEtatTicket=="Nouveau" %}
+	<span class="etape fait ">
+   
+		1<div class="desc">Nouveau</div>
+	</span><span class="ligne">
+	</span>
+    <span class="etape ">
+		2<div class="desc">En cours</div>
+	</span><span class="ligne">
+	</span>
+     
+    <span class="etape">
+		3<div class="desc">À recetter</div>
+	</span><span class="ligne  ">
+	</span>
+
+
+    <span class="etape ">
+		4<div class="desc">Réouvert</div>
+	</span><span class="ligne ">
+	</span>
+    
+    <span class="etape">
+		5<div class="desc">Terminé</div>
+	</span>
+
+
+
+
+
+
+    
+{% elseif ticket.getStatutTicket().getEtatTicket=="En cours" %}
+
+<span class="etape fait ">
+   
+		1<div class="desc">Nouveau</div>
+	</span><span class="ligne fait ">
+	</span>
+    <span class="etape fait">
+		2<div class="desc">En cours</div>
+	</span><span class="ligne">
+	</span>
+     
+    <span class="etape">
+		3<div class="desc">A recetter</div>
+	</span><span class="ligne  ">
+	</span>
+
+
+    <span class="etape ">
+		4<div class="desc">réouvert</div>
+	</span><span class="ligne ">
+	</span>
+    
+    <span class="etape">
+		5<div class="desc">Terminé</div>
+	</span>
+
+{% elseif ticket.getStatutTicket().getEtatTicket=="À recetter" %}
+
+<span class="etape fait ">
+   
+		1<div class="desc">Nouveau</div>
+	</span><span class="ligne fait ">
+	</span>
+    <span class="etape fait">
+		2<div class="desc">En cours</div>
+	</span><span class="ligne fait">
+	</span>
+     
+    <span class="etape fait">
+		3<div class="desc">À recetter</div>
+	</span><span class="ligne  ">
+	</span>
+
+
+    <span class="etape ">
+		4<div class="desc">Réouvert</div>
+	</span><span class="ligne ">
+	</span>
+    
+    <span class="etape">
+		5<div class="desc">Terminé</div>
+	</span>
+
+
+
+
+{% elseif ticket.getStatutTicket().getEtatTicket=="Réouvert" %}
+
+<span class="etape fait ">
+   
+		1<div class="desc">Nouveau</div>
+	</span><span class="ligne fait ">
+	</span>
+    <span class="etape fait">
+		2<div class="desc">En cours</div>
+	</span><span class="ligne fait">
+	</span>
+     
+    <span class="etape fait">
+		3<div class="desc">À recetter</div>
+	</span><span class="ligne fait  ">
+	</span>
+
+
+    <span class="etape  ">
+		4<div class="desc">Réouvert</div>
+	</span><span class="ligne ">
+	</span>
+    
+    <span class="etape">
+		5<div class="desc">Terminé</div>
+	</span>
+
+
+
+
+
+
+{% elseif ticket.getStatutTicket().getEtatTicket=="Terminé" %}
+
+<span class="etape fait ">
+   
+		1<div class="desc">Nouveau</div>
+	</span><span class="ligne fait ">
+	</span>
+    <span class="etape fait">
+		2<div class="desc">En cours</div>
+	</span><span class="ligne fait">
+	</span>
+     
+    <span class="etape fait">
+		3<div class="desc">À recetter</div>
+	</span><span class="ligne fait  ">
+	</span>
+
+
+    <span class="etape fait ">
+		4<div class="desc">Réouvert</div>
+	</span><span class="ligne ">
+	</span>
+    
+    <span class="etape fait">
+		5<div class="desc">Terminé</div>
+	</span>
+
+
+
+
+
+
+
+
+
+ {% endif %}
+
+
+
+
+
+
+
+
+
+</div>
+			
+        <br><br>
+
+    <div class="table-responsive">
+
+        <div class="table-wrapper" style="width:100px">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                       <div class="container">
+	<div class="row">
+		<div class="col-8">
+			<h1 class="mt-5">Détail du ticket
+			</h1>
+		</div>
+<div class="col-4">
+
+<a href="{{ path('ticket_download' , {id: ticket.id})}}" class="btn btn-light mt-5" style=" background-color: orange;
+	}">Télécharger le ticket</a>
+                      
+                      
+                    
+                </div>
+            </div>
+    <table  class="table table-striped table-hover"  
+      style="font-size:17px;align:center">
+    <thead>
+    <tr>
+
+                       <th>ID</th>
+					    <td>{{ ticket.getId() }}</td>
+					   </tr>
+                       
+										
+						<tr>
+                        <th>Crée par</th>
+						 <td >{{ ticket.getUtilisateurs().getEmail() }}</td>
+						</tr>
+
+						<tr>
+                        <th >Crée le </th>
+						<td >{{ ticket.getDateTicket()|date("d/m/Y") }}</td>
+
+		
+		
+	
+
+						</tr>
+
+						<tr>
+                        <th >Titre</th>
+								<td> {{ ticket.titreTicket}}</td>
+						</tr>
+
+						<tr>
+                        <th > Catégorie</th>
+						<td>{{ ticket.getCategorie().getNomCategorie() }}</td>
+						</tr>
+
+						<tr>
+                        <th>Domaine</th>
+						<td>{{ ticket.getDomain().getNomDomain() }}</td>
+						</tr>
+
+						<tr>
+                        <th >Sous domaine</th>
+							<td> {{ ticket.getSousDomain().getNomSsDomain() }} </td>
+						</tr>
+
+						<tr>
+                        <th>Priorité</th>
+							<td> {{ ticket.getPriorite().getNiveauPriorite() }} </td>	
+						</tr>
+
+						<tr>					
+                        <th >Status</th>
+		{% if ticket.getStatutTicket().getEtatTicket == 'Nouveau' %}
+
+           <td> <span class="badge badge-primary" style="border-radius:20px">
+           {{ ticket.getStatutTicket().getEtatTicket() }} </span> </td>
+
+
+    	{% elseif  ticket.getStatutTicket().getEtatTicket == 'En cours' %}
+
+            <td> <span class="badge badge-success" style=" border-radius:20px" >
+            {{ ticket.getStatutTicket().getEtatTicket() }} </span> </td>
+
+   		{% elseif  ticket.getStatutTicket().getEtatTicket == 'À recetter' %}
+            <td> <span class="badge badge-warning" style=" border-radius:20px" >
+            {{ ticket.getStatutTicket().getEtatTicket() }} </span> </td>
+
+
+        {% elseif   ticket.getStatutTicket().getEtatTicket == 'Réouvert' %}
+            <td> <span class="badge badge-info" style=" border-radius:20px" >
+            {{ ticket.getStatutTicket().getEtatTicket() }} </span> </td>
+
+         {% elseif ticket.getStatutTicket().getEtatTicket == 'Terminé' %}
+            <td> <span class="badge badge-danger" style=" border-radius:20px" >
+            {{ ticket.getStatutTicket().getEtatTicket() }} </span> </td>
+
+	  {% endif %}
+     
+						</tr>
+
+						<tr>
+                        <th >affectation</th>
+						{% if ticket.getAffectation() != null %}
+
+			<td>{{ ticket.getAffectation().getName() }}</td>
+		{% else %}
+			<td>En attente </td>
+		{% endif %}
+						</tr>
+
+							<tr>
+	 						<th >Commentaire</th>
+							<td> {{ ticket.getCommentaire|raw }} </td>
+						</tr>
+    
+    </thead>
+    <tbody>
+    
+
+
+		
+		
+ 
+     
+
+
+		
+		
+		
+	
+		{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

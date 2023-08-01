@@ -1,0 +1,87 @@
+
+{% extends 'BaseAdmin.html.twig' %}
+{% block title %}Détail du ticket
+{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+{% endblock %}
+
+
+{% block body %}
+	<div class="container">
+ <h1>Equipe </h1>
+ 
+        <h2>Procesus</h2><br>   <ul>
+    
+  {% for procesus in equipes  %}
+   <li>{{ procesus.id }} , {{ procesus.DateEquipe|date("m/d/Y") }} , {{ procesus.nomEquipe }} ,
+      {% for personne in procesus.membre %}
+      {#{ personne.name}#}   {{ personne.Email }} 
+	
+      {% endfor %}
+   </li>
+  {% endfor %}
+  
+   </ul>
+   
+
+  
+</div>{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

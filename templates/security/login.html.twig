@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+</head>
+
+
+		<style>
+    body {
+      background-color: #eaeded ;
+    }
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+		</style>
+
+<div class="main-block" style="text-align:center">
+	<div id="alerte">			
+		</div>
+		
+		<body>
+
+
+{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+
+			
+		{#	<div class="left-part">
+				<h1>Welcome to SOLWAY Consulting & Services</h1>
+				<i class="fas fa-sign-in-alt" style="font-size:100px"></i>
+			</div>
+			<form method="post">
+
+				<div class="title">
+					<i class="fas fa-user" style="font-size:20px"></i>
+					<h2>M'identifier</h2>
+				</div>
+				<div class="info">
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Email" required>
+					<input type="password" name="password" id="inputPassword" required placeholder="Mot de passe">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				</div>
+				<div class="checkbox">
+					<button type="submit">connexion</button>
+					<a href=" {{ path('app_register') }} ">Vous n'avez pas encore de compte?</a>
+					<a href="# ">Mot de passe oublié?</a>
+
+				</span>
+			</div>#}
+
+  <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				
+
+        <form method="post" class="login100-form validate-form">
+        <span class="login100-form-title">
+						Member Login
+					</span>
+
+
+
+        <form method="post">
+         
+
+        
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+
+            					<input class="input100" type="email" value="{{ last_username }}" 
+                      name="email" id="inputEmail" 
+                      class="form-control form-control-lg" placeholder="Email" required>
+                      <span class="focus-input100"></span>
+                      <span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+
+          </div>
+
+          <!-- Password input -->
+          <div class="wrap-input100 validate-input">
+           	<input class="input100" type="password" name="password" id="inputPassword" class="form-control form-control-lg"
+             required placeholder="Mot de passe">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+          
+          <span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+            </div>
+
+        
+<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+        
+        <div class="text-center p-t-12">
+						
+						<a class="txt2" href="\reset-password">
+ Mot de passe oublié 						</a>
+					</div>
+
+      <div class="text-center p-t-136">
+						<a class="txt2" href="{{ path('app_register') }}">
+							Créer un compte 
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+					
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"
+></script>
+
+		</body>
+</html>

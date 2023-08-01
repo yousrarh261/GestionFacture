@@ -1,0 +1,23 @@
+{% extends 'BaseAdmin.html.twig' %}
+
+{% block title %}
+	utilisateurs !
+{% endblock %}
+
+{% block body %}
+
+	<!-- Page content -->
+	<div class="main">
+
+
+		<table class="table mt-4">
+			<thead class="table-dark">
+				<p>{{ category.getId()}}</p>
+				<p>{{ category.getCodeProjet()}}</p>
+				
+			</thead>
+		</tbody>
+	</table>
+
+
+{% endblock %}

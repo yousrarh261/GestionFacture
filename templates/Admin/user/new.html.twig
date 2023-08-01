@@ -1,0 +1,78 @@
+{% extends 'BaseAdmin.html.twig' %}
+{% block title %}Création de nouvel utilisateur!
+{% endblock %}
+
+{% block stylesheets %}
+     <link rel="stylesheet" href ="{{ asset('css/styles.css') }}">
+
+<style>
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+.my-form {
+	width: 650px;
+	margin-left: -91px;
+	padding-top: 36px;
+	padding-bottom: 34px;
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+       {# <script src="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/js/axentix.min.js"></script>#}
+
+	<div class="container mt-5" style="background-color: #e9ecefc2; width: 500px;margin-right: 400px;float: right;">
+
+	{% for message in app.flashes('notice') %}
+			<div class="alert alert-success" role="alert">
+				{{ message }}
+			</div>
+	
+{% endfor %} 
+
+{{ form_start(form, {'attr': {'class': 'my-form'}}) }}
+
+	<div class="row justify-content-around">
+
+			<div class="col-7"> {{form_row(form.name)}}</div>
+		</div>
+
+	<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+
+		<div class="row justify-content-around" >
+
+			<div class="col-7">{{form_row(form.email)}}</div>
+
+		</div>
+
+			<div class="row justify-content-around">
+
+				<div class="col-7">{{form_row(form.password)}}</div>
+			</div>
+
+		<!-- Columns are always 50% wide, on mobile and desktop -->
+	
+	<div class="row justify-content-around">
+
+				<div class="col-7">{{form_row(form.roles)}}</div>
+			</div>
+
+		    	<div class="row justify-content-around">
+
+			<div class="row justify-content-around">
+          
+				<button type="submit" class="btn btn-light"
+				 style=" background-color: #F4B83D; color:white">Créer</button>
+
+			</div>
+            </div>
+		
+		{{ form_widget(form._token) }}
+
+		{{ form_end(form, {'render_rest': false}) }}
+</div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+	{% endblock %}
