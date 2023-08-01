@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class EquipeType extends AbstractType
 {
@@ -20,8 +22,10 @@ class EquipeType extends AbstractType
 {
     $builder
    
-
-    ->add('nom_equipe')
+    ->add('nom_equipe', TextType::class, [
+        'label' => 'Nom du client',
+    ])
+    
     
     /*->add('managers', EntityType::class, [
         'class' => Utilisateurs::class,
@@ -49,7 +53,7 @@ class EquipeType extends AbstractType
             ->setParameter('role', '%"'.'ROLE_MANAGER'.'"%');
             },
         'choice_label' => 'Email',
-        'label' => 'Manager',
+        'label' => 'Choisir le manager',
        'placeholder' => 'Manager',
         //'multiple'=>true
         ])

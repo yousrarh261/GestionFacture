@@ -423,6 +423,22 @@ color: #FEC74C !important
                         aria-hidden="true"></i>
                     Mon profile</a>
                 </li>
+                  <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" 
+                    style=" WIDTH: 233PX;MARGIN-LEFT: -23PX;">
+                   <i class="fa fa-cog" aria-hidden="true" style="font-size:30px;color:white;MARGIN-LEFT: 10PX;"></i>
+                    Administration</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="{{ path('admin_codeProjet')}}">Codes Projet</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ path('admin_user') }}">Utilisateurs</a>
+                        </li>
+                    </ul>
+                </li>
+               
                 <li>
                     <a href="{{path('app_logout')}}"><i class="fa fa-sign-out" aria-hidden="true"
                     style="font-size:30px;color:white"></i>
