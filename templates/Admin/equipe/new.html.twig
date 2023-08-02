@@ -3,10 +3,24 @@
 {% block title %}Administration
 {% endblock %}
 
+{% block stylesheet%}
+<style>
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* margin-right: -15px; */
+    margin-left: 155px;
+}
+
+</style>
+{% endblock %}
+
 {% block body %}
 	<div class="container mt-5">
 
-		<h1 class="mt-5">Ajouter une nouvelle équipe</h1>
+		<h1 class="mt-5">Ajouter un client</h1>
 
 {{ include('admin/equipe/_form.html.twig') }}
 
