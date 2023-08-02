@@ -97,12 +97,26 @@ class Utilisateurs implements UserInterface
      * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="managers")
      */
     private $equipesGerer;
-
- 
 /**
  * @ORM\ManyToOne(targetEntity=Equipe::class, inversedBy="membres")
  */
 private $equipe;
+
+/**
+ * @ORM\ManyToOne(targetEntity=Utilisateurs::class, inversedBy="managedUsers")
+ */
+private $manager;
+/**
+ * @ORM\OneToMany(targetEntity=Utilisateurs::class, mappedBy="manager")
+ */
+private $managedUsers;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Utilisateurs::class, mappedBy="equipe")
+     */
+    private $membre;
+
 
 
 
@@ -119,10 +133,14 @@ private $equipe;
         $this->isVerified = false;
         $this->isValidByAdmin =false; 
         $this->responsables = new ArrayCollection();
-
+        $this-> manager = new ArrayCollection(); 
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
+        $this->manager = null;
+        $this->managedUsers = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -144,7 +162,6 @@ private $equipe;
     {
         return $this->equipe;
     }
-
 
     public function setEmail(string $email): self
     {
@@ -471,6 +488,41 @@ private $equipe;
         return $this;
     }
    
+    public function getManager(): ?Utilisateurs
+{
+    return $this->manager;
+}
+    public function setManager(?Utilisateurs $manager): self
+{
+    $this->manager = $manager;
 
-
+    return $this;
+}
+    /**
+    * @return Collection|Utilisateurs[]
+    */
+    public function getManagedUsers(): Collection
+    {
+    return $this->managedUsers;
+    }
+    public function addManagedUser(Utilisateurs $user): self
+    {
+        if (!$this->managedUsers->contains($user)) {
+            $this->managedUsers[] = $user;
+            $user->setManager($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeManagedUser(Utilisateurs $user): self
+    {
+        if ($this->managedUsers->contains($user)) {
+            $this->managedUsers->removeElement($user);
+            // Remove the manager assignment from the user
+            $user->setManager(null);
+        }
+    
+        return $this;
+    }
 }

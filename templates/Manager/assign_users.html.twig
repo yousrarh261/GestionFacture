@@ -1,0 +1,20 @@
+{# templates/manager/assign_users.html.twig #}
+
+{% extends 'baseManager.html.twig' %}
+{% block stylesheet %}
+<style>
+h1{
+    margin-left: 40px
+}
+
+</style>
+
+{% endblock %}
+{% block body %}
+    <h1>Assign Users to Manager</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Assign Users</button>
+    {{ form_end(form) }}
+{% endblock %}

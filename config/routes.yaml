@@ -12,3 +12,6 @@ reset_password:
 edit_user:
     path: '/user/{id}/edit'
     controller: App\Controller\AdminUserController::edit
+# config/routes.yaml
+
+

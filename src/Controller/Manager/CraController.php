@@ -9,6 +9,8 @@ use App\Entity\DayDetails;
 use App\Entity\Calendrier;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Entity\Utilisateurs; // Make sure this use statement is correct
+use App\Form\ManagerAssignmentType;
 
 use App\Entity\CodeProjet;
 use App\Form\CraEditType;
@@ -19,6 +21,7 @@ use App\Repository\CraRepository;
 use App\Repository\ClientRepository;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -596,4 +599,37 @@ public function create(Request $request): Response
                 'days' => $dates,
             ]);
         }
+         /**
+     * @Route("/assign-users", name="assign_users")
+     */
+    public function assignUsers(Request $request)
+    {
+        $manager = $this->getUser(); // Get the currently logged-in manager user
+
+        // Fetch all users to display in the form
+        $userRepository = $this->getDoctrine()->getRepository(Utilisateurs::class);
+        $allUsers = $userRepository->findAll();
+
+        // Remove the manager from the list of users
+        $users = array_filter($allUsers, function ($user) use ($manager) {
+            return $user !== $manager;
+        });
+
+        $form = $this->createForm(ManagerAssignmentType::class, $manager, ['users' => $users]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // The form was submitted and is valid, so save the changes
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($manager);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('manager_assign_users');
+        }
+
+        return $this->render('manager/assign_users.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 } 

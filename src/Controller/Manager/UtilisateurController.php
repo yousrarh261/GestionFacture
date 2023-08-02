@@ -7,6 +7,8 @@ use App\Entity\Responsable;
 use App\Form\UserType;
 use App\Form\EditProfileType;
 use App\Form\UtilisateurType;
+use App\Form\ManagerAssignmentType;
+
 use App\Repository\UtilisateursRepository;
 use App\Repository\ResponsableRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -138,5 +140,9 @@ class UtilisateurController extends AbstractController
  
          return $this->render('Manager/client/EditPasse.html.twig');
      }
+
+
+      
 }
-  
+
+
